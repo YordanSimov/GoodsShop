@@ -1,0 +1,28 @@
+{
+    "products": {
+        "3987279d-0ad4-4afb-8ca9-5b256ae3b298": {
+            "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+            "name": "Computer setup",
+            "img": "https://img.etimg.com/thumb/width-1200,height-900,imgsize-74560,resizemode-75,msid-104220582/top-trending-products/electronics/laptops/best-gaming-computer-sets-for-an-unparalleled-experience-starting-at-just-23999.jpg",
+            "description": "The best computer ever!",
+            "price": 2000,
+            "_createdOn": 1613551279012
+        },
+        "8f414b4f-ab39-4d36-bedb-2ad69da9c830": {
+            "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+            "name": "Laptop",
+            "img": "https://cdn.ttgtmedia.com/rms/onlineimages/hp_elitebook_mobile.jpg",
+            "description": "One of the best laptops on the market. With superb specifications.",
+            "price": 1000,
+            "_createdOn": 1613551344360
+        },
+        "985d9eab-ad2e-4622-a5c8-116261fb1fd2": {
+            "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+            "name": "White office mouse",
+            "img": "https://upload.wikimedia.org/wikipedia/commons/2/22/3-Tasten-Maus_Microsoft.jpg",
+            "description": "This cheap office mouse is the best thing you can buy for your computer.",
+            "price": 10,
+            "_createdOn": 1613551388703
+        }
+    }
+}
