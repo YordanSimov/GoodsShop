@@ -1,8 +1,10 @@
 import { getAllProducts } from "../connections/productsConnection";
-import ProductDetails from "./ProductDetails";
+import { useEffect, useState } from 'react';
+import { Button, Card } from 'react-bootstrap';
+import { ProductDetails } from "./ProductDetails";
+import { Link } from 'react-router-dom';
 
-
-export default function Products() {
+export function Products() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -16,10 +18,23 @@ export default function Products() {
 
 
     return (
-      <div style={{display: "flex"}}>
-        {products.map(product => 
-                <ProductDetails props={product} />
-            )}
-      </div>  
+        <>
+            <div style={{ display: "flex" }}>
+                {products.map(product =>
+                    <Card style={{ width: '18rem', marginRight: "2em" }}>
+                        <Card.Img variant="top" src={product.img} />
+                        <Card.Body>
+                            <Card.Title>
+                                <Link to={`/product/${product._id}`} element={<ProductDetails product={product} />}>{product.name}</Link>
+                            </Card.Title>
+                            <Card.Text>
+                                {product.description}
+                            </Card.Text>
+                            <Button variant="primary">Buy for {product.price} $</Button>
+                        </Card.Body>
+                    </Card>
+                )}
+            </div>
+        </>
     );
 }
