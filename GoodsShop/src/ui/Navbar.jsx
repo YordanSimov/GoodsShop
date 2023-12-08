@@ -5,8 +5,8 @@ import AuthContext from "../context/authContext";
 
 export default function NavBar() {
 
-    const { isAuthenticated } = useContext(AuthContext);
-
+    const { isAuthenticated, username } = useContext(AuthContext);
+    console.log(username);
     return (
         <Navbar expand={"lg"} fixed={"top"} style={{ width: "100%" }} className="bg-body-tertiary">
             <Container>
@@ -17,9 +17,11 @@ export default function NavBar() {
                         <Link to={"/"} style={{ marginRight: "2em" }}>Home</Link>
                         <Link to={"/products"}>Products</Link>
                     </Nav>
+                    {username === "Admin" && 
                     <Nav className="me-auto" style={{ marginRight: "2em", color: "black" }}>
-                        Add product
+                        <Link to={"/add-product"}>Add Product</Link>
                     </Nav>
+                    }
                     {isAuthenticated ? (
                         <>
                             <Nav style={{ marginRight: "1em", color: "black" }}>

@@ -61,7 +61,8 @@ export const AuthProvider = ({ children }) => {
     const values = {
         login, register, logout,
         isAuthenticated: !!auth.accessToken,
-        userId: auth._id
+        userId: auth._id,
+        username: auth.username
     }
 
     return (

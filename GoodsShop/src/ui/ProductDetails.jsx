@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getById } from "../connections/productsConnection";
+import AuthContext from "../context/authContext";
 
 export function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState({});
+    const { username } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchProductByName = async () => {
@@ -22,8 +24,12 @@ export function ProductDetails() {
             <Container className="mt-3">
                 <Row className="mb-3">
                     <Col md={10}>
-                        <Button style={{marginRight: "1em"}} variant="primary">Edit</Button>
-                        <Button variant="danger">Delete</Button>
+                        {username === "Admin" &&
+                            <>
+                                <Button style={{ marginRight: "1em" }} variant="primary">Edit</Button>
+                                <Button variant="danger">Delete</Button>
+                            </>
+                        }
                     </Col>
                 </Row>
                 <Row>
