@@ -6,7 +6,6 @@ import AuthContext from "../context/authContext";
 export default function NavBar() {
 
     const { isAuthenticated, username } = useContext(AuthContext);
-    console.log(username);
     return (
         <Navbar expand={"lg"} fixed={"top"} style={{ width: "100%" }} className="bg-body-tertiary">
             <Container>

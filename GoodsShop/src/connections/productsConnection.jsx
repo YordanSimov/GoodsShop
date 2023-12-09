@@ -15,7 +15,7 @@ export function getTopProducts() {
 export function getById(id) {
     try {
         const product = fetch(`${url}/${id}`)
-            .then(x => x.json());
+            .then(x => x.json()).then(x=> x);
 
         return product;
     } catch (ex) {
@@ -44,6 +44,24 @@ export function addProduct(product) {
                 'X-Authorization': token
             },
             method: "POST"
+        });
+
+        return result;
+    } catch (ex) {
+        throw new Exception(ex);
+    }
+}
+
+export function editProduct(product) {
+    try {
+        const token = localStorage.getItem("accessToken");
+        const result = fetch(`${url}/${product._id}`, {
+            body: JSON.stringify(product),
+            headers: {
+                'content-type': 'application/json',
+                'X-Authorization': token
+            },
+            method: "PUT"
         });
 
         return result;

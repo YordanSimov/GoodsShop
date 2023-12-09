@@ -23,11 +23,11 @@ export default function Home() {
             <h3 style={{ color: 'white', paddingBottom: 15 }}>Our most popular products</h3>
             <div style={{ display: 'flex' }}>
                 {topProducts.map((product) =>
-                    <Card style={{ width: '18rem', marginRight: "2em" }} key={product.name + product.price}>
+                    <Card style={{ width: '18rem', marginRight: "2em" }} key={product._id}>
                         <Card.Img variant="top" src={product.img} />
                         <Card.Body>
                             <Card.Title>
-                                <Link to={`/product/${product._id}`} element={<ProductDetails product={product} />}>{product.name}</Link>
+                                <Link to={`/product/${product._id}`} element={<ProductDetails />}>{product.name}</Link>
                             </Card.Title>
                             <Card.Text>
                                 {product.description}

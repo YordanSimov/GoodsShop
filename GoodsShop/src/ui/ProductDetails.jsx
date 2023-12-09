@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import { useParams } from "react-router-dom";
+import { useParams,Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getById } from "../connections/productsConnection";
 import AuthContext from "../context/authContext";
+import EditProduct from "./EditProduct";
 
 export function ProductDetails() {
     const { id } = useParams();
@@ -11,12 +12,14 @@ export function ProductDetails() {
     const { username } = useContext(AuthContext);
 
     useEffect(() => {
-        const fetchProductByName = async () => {
-            const product = await getById(id);
-            setProduct(product);
+        const fetchProductById = async () => {
+            const result = await getById(id);
+            setProduct(result);
         }
 
-        fetchProductByName();
+        if(id){
+            fetchProductById();
+        }
     }, [id])
 
     return (
@@ -26,7 +29,9 @@ export function ProductDetails() {
                     <Col md={10}>
                         {username === "Admin" &&
                             <>
-                                <Button style={{ marginRight: "1em" }} variant="primary">Edit</Button>
+                                <Button style={{ marginRight: "1em" }} variant="primary">
+                                    <Link className="text-white" to={`/product/edit/${product._id}`} element={<EditProduct />}>Edit</Link>
+                                </Button>
                                 <Button variant="danger">Delete</Button>
                             </>
                         }

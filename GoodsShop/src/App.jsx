@@ -1,6 +1,7 @@
 import './App.css'
 import { AuthProvider } from './context/authContext';
 import AddProduct from './ui/AddProduct';
+import EditProduct from './ui/EditProduct';
 import Home from './ui/Home';
 import { Login } from './ui/Identity/Login';
 import Logout from './ui/Identity/Logout';
@@ -22,6 +23,7 @@ function App() {
         <Route path={"/register"} element={<Register />} />
         <Route path={"/logout"} element={<Logout />} />
         <Route path={"/add-product"} element={<AddProduct />} />
+        <Route path={"/product/edit/:id"} element={<EditProduct />} />
       </Routes>
     </AuthProvider>
   )
