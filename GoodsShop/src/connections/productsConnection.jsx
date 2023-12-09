@@ -15,7 +15,7 @@ export function getTopProducts() {
 export function getById(id) {
     try {
         const product = fetch(`${url}/${id}`)
-            .then(x => x.json()).then(x=> x);
+            .then(x => x.json()).then(x => x);
 
         return product;
     } catch (ex) {
@@ -65,6 +65,22 @@ export function editProduct(product) {
         });
 
         return result;
+    } catch (ex) {
+        throw new Exception(ex);
+    }
+}
+
+export function deleteProduct(id) {
+    try {
+        const token = localStorage.getItem("accessToken");
+        fetch(`${url}/${id}`, {
+            headers: {
+                'content-type': 'application/json',
+                'X-Authorization': token
+            },
+            method: "DELETE"
+        });
+
     } catch (ex) {
         throw new Exception(ex);
     }

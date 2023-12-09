@@ -1,15 +1,25 @@
 import React, { useContext } from "react";
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import { useParams,Link } from "react-router-dom";
+import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
+import { useParams, Link,useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getById } from "../connections/productsConnection";
+import { getById, deleteProduct } from "../connections/productsConnection";
 import AuthContext from "../context/authContext";
 import EditProduct from "./EditProduct";
 
 export function ProductDetails() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [product, setProduct] = useState({});
     const { username } = useContext(AuthContext);
+    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
+    const openDeleteDialog = () => setShowDeleteDialog(true);
+    const closeDeleteDialog = () => setShowDeleteDialog(false);
+
+    const handleDelete = () => {
+        deleteProduct(id);
+        navigate("/products")
+    };
 
     useEffect(() => {
         const fetchProductById = async () => {
@@ -17,7 +27,7 @@ export function ProductDetails() {
             setProduct(result);
         }
 
-        if(id){
+        if (id) {
             fetchProductById();
         }
     }, [id])
@@ -32,7 +42,7 @@ export function ProductDetails() {
                                 <Button style={{ marginRight: "1em" }} variant="primary">
                                     <Link className="text-white" to={`/product/edit/${product._id}`} element={<EditProduct />}>Edit</Link>
                                 </Button>
-                                <Button variant="danger">Delete</Button>
+                                <Button onClick={openDeleteDialog} variant="danger">Delete</Button>
                             </>
                         }
                     </Col>
@@ -49,7 +59,31 @@ export function ProductDetails() {
                     </Col>
                 </Row>
             </Container>
-
+            <DeleteDialog
+                onDelete={handleDelete}
+                onClose={closeDeleteDialog}
+                show={showDeleteDialog}
+            />
         </>
     );
 }
+
+const DeleteDialog = ({ onDelete, onClose, show }) => {
+    const handleDelete = () => {
+        onDelete();
+        onClose();
+    };
+
+    return (
+        <Modal show={show} onHide={onClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>Confirm Delete</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Are you sure you want to delete this product?</Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={onClose}>Cancel</Button>
+                <Button variant="danger" onClick={handleDelete}>Delete</Button>
+            </Modal.Footer>
+        </Modal>
+    );
+};
